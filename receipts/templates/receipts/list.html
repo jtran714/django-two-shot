@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Receipts</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Vendor</th>
+        <th>Total</th>
+        <th>Tax</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Account</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for receipt in receipt_list %}
+        <tr>
+          <td>{{ receipt.vendor }}</td>
+          <td>{{ receipt.total }}</td>
+          <td>{{ receipt.tax }}</td>
+          <td>{{ receipt.date|date:"m-d-Y" }}</td>
+          <td>{{ receipt.category.name }}</td>
+          <td>{{ receipt.account.name }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

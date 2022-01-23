@@ -1,0 +1,41 @@
+h1 {
+  text-align: center;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  max-width: 800px;
+  min-width: 400px;
+  margin: auto;
+}
+
+th, td {
+  border: 1px solid lightblue;
+  padding: .5em;
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin: 1em;
+}
+
+.narrow-form {
+  border: 1px solid grey;
+  max-width: 400px;
+  margin: auto;
+  padding: 2em;
+}
+
+.helptext {
+  display: block;
+  font-size: 80%;
+}
