@@ -1,36 +1,25 @@
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-
+from django_webtest import WebTest
 from django.contrib.auth.models import User
+from receipts.models import ExpenseCategory
 
 
-class CreateAccountFormTests(StaticLiveServerTestCase):
+class CreateCategoryFormTests(WebTest):
     def setUp(self):
         self.password = "abcdefg"
         self.owner = User.objects.create_user("noor", password=self.password)
-        options = Options()
-        options.headless = True
-        self.client = webdriver.Chrome(options=options)
-        self.login()
-        self.url = f"{self.live_server_url}/receipts/categories/create/"
-        self.client.get(self.url)
+        self.url = "/receipts/categories/create/"
+        self.response = self.app.get(self.url, user=self.owner)
+        self.form = self.response.form
 
     def test_signup_form_has_name_field(self):
-        self.client.find_element(By.ID, "id_name")
+        self.assertIn("name", self.form.fields)
 
     def test_create_form_is_post(self):
-        form = self.client.find_element(By.TAG_NAME, "form")
-        method = form.get_attribute("method")
-        self.assertEqual(method.lower(), "post")
+        self.assertEqual(self.form.method.lower(), "post")
 
-    def login(self):
-        self.client.get(f"{self.live_server_url}/accounts/login/")
-        form = self.client.find_element(By.TAG_NAME, "form")
-        button = form.find_element(By.TAG_NAME, "button")
-        username = self.client.find_element(By.ID, "id_username")
-        password = self.client.find_element(By.ID, "id_password")
-        username.send_keys(self.owner.username)
-        password.send_keys(self.password)
-        button.click()
+    def test_create_category(self):
+        self.form["name"] = "Test Category"
+        res = self.form.submit()
+        self.assertNotIn("form", res)
+        category = ExpenseCategory.objects.filter(name="Test Category").get()
+        self.assertEqual(category.name, "Test Category")
