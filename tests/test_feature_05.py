@@ -106,7 +106,7 @@ class FeatureTests(TestCase):
             table = document.select("html", "body", "main", "table")
             self.assertIsNotNone(
                 table,
-                msg="The response did not have a table tag as a direct child of the div",  # noqa: E501
+                msg="The response did not have a table tag as a direct child of the main",  # noqa: E501
             )
             self.assertIn(
                 "Vendor",
