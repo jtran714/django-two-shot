@@ -6,7 +6,12 @@ from django.utils import timezone
 
 
 class FeatureTests(TestCase):
-    fixtures = ["users", "categories", "accounts", "receipts"]
+    fixtures = [
+        "tests/fixtures/users",
+        "tests/fixtures/categories",
+        "tests/fixtures/accounts",
+        "tests/fixtures/receipts",
+    ]
 
     def setUp(self):
         self.client = Client()

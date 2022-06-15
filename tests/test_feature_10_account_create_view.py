@@ -9,7 +9,7 @@ from receipts.models import Account, ExpenseCategory, Receipt
 
 
 class FeatureTests(TestCase):
-    fixtures = ["users"]
+    fixtures = ["tests/fixtures/users"]
 
     def setUp(self):
         self.client = Client()
