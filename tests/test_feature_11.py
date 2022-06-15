@@ -160,7 +160,7 @@ class FeatureTests(TestCase):
 
     def test_create_receipt_creates_receipt(self):
         category = ExpenseCategory.objects.first()
-        account = ExpenseCategory.objects.first()
+        account = Account.objects.first()
 
         self.client.post(
             reverse("create_receipt"),
@@ -180,7 +180,7 @@ class FeatureTests(TestCase):
 
     def test_create_redirects_to_home(self):
         category = ExpenseCategory.objects.first()
-        account = ExpenseCategory.objects.first()
+        account = Account.objects.first()
         response = self.client.post(
             "/receipts/create/",
             {
