@@ -6,7 +6,7 @@ from .utils import Document
 from receipts.models import Account, ExpenseCategory
 
 
-class FeatureTests(TestCase):
+class CategoryCreateViewTestCase(TestCase):
     fixtures = ["tests/fixtures/users"]
 
     def setUp(self):

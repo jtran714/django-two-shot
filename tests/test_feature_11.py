@@ -197,20 +197,3 @@ class FeatureTests(TestCase):
             reverse("home"),
             msg="Create does not redirect to home",
         )
-
-    def test_list_view_has_link_to_create(self):
-        response = self.client.get(reverse("home"))
-        content = response.content.decode("utf-8")
-        document = Document()
-        document.feed(content)
-        html = document.select("html")
-        links = html.get_all_children("a")
-        create_link = None
-        for link in links:
-            if link.attrs.get("href") == reverse("create_receipt"):
-                create_link = link
-                break
-        self.assertIsNotNone(
-            create_link,
-            msg="Could not find the create link for receipts on the list view",
-        )
