@@ -26,7 +26,7 @@ class FeatureTests(TestCase):
     def setUpTestData(cls):
         cls.noor = User.objects.get(username="noor")
 
-    def test_create_receipt_resolves_to_accounts_create_receipt(self):
+    def test_create_receipt_resolves_to_create_receipt(self):
         path = reverse("create_receipt")
         self.assertEqual(
             path,
@@ -34,7 +34,7 @@ class FeatureTests(TestCase):
             msg="Could not resolve path name 'create_receipt' to '/receipts/create/",
         )
 
-    def test_accounts_create_receipt_returns_200(self):
+    def test_create_receipt_returns_200(self):
         self.assertEqual(
             self.response.status_code,
             200,
@@ -148,13 +148,13 @@ class FeatureTests(TestCase):
     def test_form_has_button(self):
         form = self.document.select("html", "body", "main", "div", "form")
         buttons = form.get_all_children("button")
-        button = None
+        found_button = None
         for button in buttons:
-            if button.inner_text().strip() == "Create":
-                button = button
+            if button.inner_text().strip().lower() == "create":
+                found_button = button
                 break
         self.assertIsNotNone(
-            button,
+            found_button,
             msg="Could not find the 'Create' button",
         )
 

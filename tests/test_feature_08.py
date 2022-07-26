@@ -2,9 +2,6 @@ from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from .utils import Document
-from receipts.models import Receipt
-
 
 class FeatureTests(TestCase):
     def setUp(self):

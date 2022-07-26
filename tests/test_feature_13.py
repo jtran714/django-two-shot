@@ -3,7 +3,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 
 from .utils import Document
-from receipts.models import Account, ExpenseCategory
+from receipts.models import ExpenseCategory
 
 
 class CategoryCreateViewTestCase(TestCase):
@@ -25,7 +25,7 @@ class CategoryCreateViewTestCase(TestCase):
         self.assertEqual(
             self.response.status_code,
             200,
-            msg="Did not get the create receipt page",
+            msg="Did not get the create category page",
         )
 
     def test_page_has_fundamental_five(self):
@@ -70,13 +70,13 @@ class CategoryCreateViewTestCase(TestCase):
     def test_form_has_button(self):
         form = self.document.select("html", "body", "main", "div", "form")
         buttons = form.get_all_children("button")
-        button = None
+        found_button = None
         for button in buttons:
-            if button.inner_text().strip() == "Create":
-                button = button
+            if button.inner_text().strip().lower() == "create":
+                found_button = button
                 break
         self.assertIsNotNone(
-            button,
+            found_button,
             msg="Could not find the 'Create' button",
         )
 

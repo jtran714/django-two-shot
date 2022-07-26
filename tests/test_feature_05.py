@@ -1,8 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from .utils import Document
-from receipts.models import Receipt, ExpenseCategory, Account
-from django.utils import timezone
+from receipts.models import Receipt
 
 
 class FeatureTests(TestCase):

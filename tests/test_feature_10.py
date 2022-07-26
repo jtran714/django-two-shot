@@ -96,13 +96,13 @@ class FeatureTests(TestCase):
     def test_form_has_button(self):
         form = self.document.select("html", "body", "main", "div", "form")
         buttons = form.get_all_children("button")
-        button = None
+        found_button = None
         for button in buttons:
-            if button.inner_text().strip() == "Signup":
-                button = button
+            if button.inner_text().strip().lower() == "signup":
+                found_button = button
                 break
         self.assertIsNotNone(
-            button,
+            found_button,
             msg="Could not find the 'Signup' button",
         )
 
