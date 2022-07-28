@@ -104,7 +104,7 @@ class CategoryCreateViewTestCase(TestCase):
         )
 
     def test_list_view_has_link_to_create(self):
-        response = self.client.get(reverse("home"))
+        response = self.client.get(reverse("list_categories"))
         content = response.content.decode("utf-8")
         document = Document()
         document.feed(content)
