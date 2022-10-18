@@ -1,3 +1,4 @@
+from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
@@ -67,12 +68,12 @@ class FeatureTests(TestCase):
             msg="Could not find the username input",
         )
 
-    def test_form_has_password1_input(self):
+    def test_form_has_password_input(self):
         form = self.document.select("html", "body", "main", "div", "form")
         inputs = form.get_all_children("input")
         password = None
         for input in inputs:
-            if input.attrs.get("name") == "password1":
+            if input.attrs.get("name") == "password":
                 password = input
                 break
         self.assertIsNotNone(
@@ -80,12 +81,12 @@ class FeatureTests(TestCase):
             msg="Could not find the password1 input",
         )
 
-    def test_form_has_password2_input(self):
+    def test_form_has_password_confirmation_input(self):
         form = self.document.select("html", "body", "main", "div", "form")
         inputs = form.get_all_children("input")
         password = None
         for input in inputs:
-            if input.attrs.get("name") == "password2":
+            if input.attrs.get("name") == "password_confirmation":
                 password = input
                 break
         self.assertIsNotNone(
@@ -109,8 +110,8 @@ class FeatureTests(TestCase):
     def test_signup_works(self):
         credentials = {
             "username": "noor",
-            "password1": "1234abcd.",
-            "password2": "1234abcd.",
+            "password": "1234abcd.",
+            "password_confirmation": "1234abcd.",
         }
         response = self.client.post(reverse("signup"), credentials)
         self.assertEqual(
@@ -127,13 +128,9 @@ class FeatureTests(TestCase):
     def test_signup_fails_for_unknown_user(self):
         credentials = {
             "username": "noor",
-            "password1": "1234abcd.",
-            "password2": "1234abcd.",
+            "password": "1234abcd.",
+            "password_confirmation": "1234abcd.",
         }
         User.objects.create_user("noor", password="abcd1234.")
-        response = self.client.post(reverse("signup"), credentials)
-        self.assertEqual(
-            response.status_code,
-            200,
-            msg="Signup does not seem to work",
-        )
+        with self.assertRaises(IntegrityError):
+            self.client.post(reverse("signup"), credentials)

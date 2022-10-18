@@ -119,7 +119,7 @@ class FeatureTests(TestCase):
         self.assertContains(
             response,
             "%.3f" % noors_receipt.tax,
-            msg_prefix=f"Did not find the tax in the HTML",
+            msg_prefix="Did not find the tax in the HTML",
             html=True,
         )
 
@@ -133,8 +133,8 @@ class FeatureTests(TestCase):
         # Assert
         self.assertContains(
             response,
-            noors_receipt.date.strftime("%m-%d-%Y"),
-            msg_prefix=f"Did not find the date formatted as m-d-Y in the HTML",
+            noors_receipt.date.strftime("%m/%d/%y"),
+            msg_prefix="Did not find the date formatted as m/d/YY in the HTML",
             html=True,
         )
 
@@ -149,7 +149,7 @@ class FeatureTests(TestCase):
         self.assertContains(
             response,
             noors_receipt.category.name,
-            msg_prefix=f"Did not find the category name in the HTML",
+            msg_prefix="Did not find the category name in the HTML",
             html=True,
         )
 
@@ -164,6 +164,6 @@ class FeatureTests(TestCase):
         self.assertContains(
             response,
             noors_receipt.account.name,
-            msg_prefix=f"Did not find the account name in the HTML",
+            msg_prefix="Did not find the account name in the HTML",
             html=True,
         )

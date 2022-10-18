@@ -121,22 +121,6 @@ class FeatureTests(TestCase):
         except AttributeError:
             self.fail("Could not find 'ExpenseCategory.owner'")
 
-    def test_expense_category_str_method_returns_name(self):
-        try:
-            from receipts.models import ExpenseCategory
-
-            category = ExpenseCategory(name="My Category")
-            self.assertEqual(
-                str(category),
-                "My Category",
-                msg="ExpenseCategory.__str__ does not return the value of ExpenseCategory.name",
-            )
-
-        except ModuleNotFoundError:
-            self.fail("Could not find 'tasks.models'")
-        except ImportError:
-            self.fail("Could not find 'tasks.models.Task'")
-
     def test_account_model_exists(self):
         try:
             from receipts.models import Account  # noqa: F401
@@ -290,22 +274,6 @@ class FeatureTests(TestCase):
             self.fail("Could not find 'receipts.models.Account'")
         except AttributeError:
             self.fail("Could not find 'Account.owner'")
-
-    def test_account_str_method_returns_name(self):
-        try:
-            from receipts.models import Account
-
-            category = Account(name="My Category")
-            self.assertEqual(
-                str(category),
-                "My Category",
-                msg="Account.__str__ does not return the value of Account.name",
-            )
-
-        except ModuleNotFoundError:
-            self.fail("Could not find 'tasks.models'")
-        except ImportError:
-            self.fail("Could not find 'tasks.models.Task'")
 
     def test_receipt_model_exists(self):
         try:

@@ -102,20 +102,3 @@ class CategoryCreateViewTestCase(TestCase):
             "/receipts/categories/",
             msg="Create does not redirect to /receipts/categories/",
         )
-
-    def test_list_view_has_link_to_create(self):
-        response = self.client.get(reverse("list_categories"))
-        content = response.content.decode("utf-8")
-        document = Document()
-        document.feed(content)
-        html = document.select("html")
-        links = html.get_all_children("a")
-        create_link = None
-        for link in links:
-            if link.attrs.get("href") == "/receipts/categories/create/":
-                create_link = link
-                break
-        self.assertIsNotNone(
-            create_link,
-            msg="Could not find the create link for categories on the list view",
-        )
