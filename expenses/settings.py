@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "receipts.apps.ReceiptsConfig",
+    "accounts.apps.AccountsConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
