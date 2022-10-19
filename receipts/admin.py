@@ -5,7 +5,7 @@ from receipts.models import ExpenseCategory, Account, Receipt
 
 
 @admin.register(ExpenseCategory)
-class ExpenseCategory(admin.ModelAdmin):
+class ExpenseCategoryAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "owner",
