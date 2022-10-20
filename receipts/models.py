@@ -32,19 +32,19 @@ class Receipt(models.Model):
         max_digits=10,
         decimal_places=3,
     )
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
     purchaser = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="receipts",
         on_delete=models.CASCADE,
     )
     category = models.ForeignKey(
-        "ExpenseCategory",
+        ExpenseCategory,
         related_name="receipts",
         on_delete=models.CASCADE,
     )
     account = models.ForeignKey(
-        "Account",
+        Account,
         related_name="receipts",
         on_delete=models.CASCADE,
         null=True,

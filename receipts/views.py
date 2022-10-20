@@ -5,10 +5,8 @@ from .models import Receipt
 
 
 def receipt_list(request):
-    receipts = Receipt.object.all()
+    receipts = Receipt.objects.all()
     context = {
-        "show_receipt": receipts,
+        "receipts": receipts,
     }
     return render(request, "receipts/list.html", context)
-
-
