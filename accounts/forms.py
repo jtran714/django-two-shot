@@ -7,3 +7,12 @@ class LogInForm(forms.Form):
         max_length=150,
         widget=forms.PasswordInput,
     )
+
+
+class SignUpForm(forms.Form):
+    username = forms.CharField(max_length=150)
+    password = forms.CharField(max_length=150)
+    password_confirmation = forms.CharField(
+        max_length=150,
+        widget=forms.PasswordInput(),
+        )
