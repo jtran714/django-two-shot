@@ -30,4 +30,4 @@ class ReceiptAdmin(admin.ModelAdmin):
         "purchaser",
         "category",
         "account",
-        )
+    )
