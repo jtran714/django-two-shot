@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>List of Receipts</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'create_receipt' %}">Create a Receipt</a></li>
+                <li><a href="{% url 'create_category' %}">Create a Category</a></li>
+                <li><a href="{% url 'create_account' %}">Create an Account</a></li>
+                <li><a href="{% url 'home' %}">Receipts List</a></li>
+                <li><a href="{% url 'category_list' %}">Categories List</a></li>
+                <li><a href="{% url 'account_list' %}">Account List</a></li>
+                <li><a href="{% url 'logout' %}"> Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    {% block content %}{% endblock content %}
+</body>
+</html>

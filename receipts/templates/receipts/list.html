@@ -1,55 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-                <li><a href="{% url 'create_account' %}">Create an Account</a></li>
-                <li><a href="{% url 'home' %}">Receipts List</a></li>
-                <li><a href="{% url 'category_list' %}">Categories List</a></li>
-                <li><a href="{% url 'account_list' %}">Account List</a></li>
-                <li><a href="{% url 'create_category' %}">Create a Category</a></li>
-                <li><a href="{% url 'create_receipt' %}">Create a Receipt</a></li>
-                {% else %}
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
-        </ul>
-    </nav>
-        <main>
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <main>
         <h1>My Receipts</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Vendor</th>
-                        <th>Total</th>
-                        <th>Tax</th>
-                        <th>Date</th>
-                        <th>Category</th>
-                        <th>Account</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for receipt in receipts %}
-                    <tr>
-                        <td>{{ receipt.vendor }}</td>
-                        <td>{{ receipt.total }}</td>
-                        <td>{{ receipt.tax }}</td>
-                        <td>{{ receipt.date|date:"n/j/y" }}</td>
-                        <td>{{ receipt.category.name }}</td>
-                        <td>{{ receipt.account.name }}</td>
-                    </tr>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vendor</th>
+                    <th>Total</th>
+                    <th>Tax</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Account</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for receipt in receipts %} <!--receipts is from views.py key-->
+                <tr>
+                    <td>{{ receipt.vendor }}</td>
+                    <td>{{ receipt.total }}</td>
+                    <td>{{ receipt.tax }}</td>
+                    <td>{{ receipt.date|date:"n/j/y" }}</td> <!--wants m/d/YY-->
+                    <td>{{ receipt.category.name }}</td> <!--For the "Category" column, show the Category object's name-->
+                    <td>{{ receipt.account.name }}</td> <!--For the "Account" column, show the Account object's name-->
+                </tr>
                 {% endfor %}
-                </tbody>
-            </table>
-        </main>
-</body>
-</html>
+            </tbody>
+        </table>
+    </main>
+{% endblock content%}
